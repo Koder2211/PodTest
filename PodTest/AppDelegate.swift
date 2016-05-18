@@ -16,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        KCSClient.sharedClient().initializeKinveyServiceForAppKey(
+            "kid_-Jii9oHxC",
+            withAppSecret: "2cf210b11d53480f9aa87fb90e6822ee",
+            usingOptions: nil
+        )
+        
+        //KCSPush.registerForPush()
+        
+        KCSPing.pingKinveyWithBlock { (result: KCSPingResult!) -> Void in
+            if result.pingWasSuccessful {
+                NSLog("Kinvey Ping Success")
+                //KCSPush.sharedPush().setPushBadgeNumber(101)
+            } else {
+                NSLog("Kinvey Ping Failed")
+            }
+        }
+
+        
         return true
     }
 
